@@ -15,6 +15,10 @@ Code has been developed with `Python 3.6.13`. It should work with other versions
 $ pip install -r requirements.txt
 ```
 
+#### Checkpoints
+
+The tensorflow checkpoints can be download [here](https://drive.google.com/drive/folders/11v5-xXhPa6Rv6t5V2koeOM9MLdrxvWM9?usp=sharing). Unzip the folder and save it into this projects directory: "style-drumsynth/checkpoints".
+
 ### Usage
 
 The code is contained within the `ads_demo.py` script, which enables conditional synthesises of drum sounds using a pretrained generator.
