@@ -61,7 +61,7 @@ Pretrained model weights are saved in the ads_demo/checkpoints folder.
 
 
 
-For more information, please **visit the corresponding [supporting website](https://jake-drysdale.github.io/blog/adversarial-drum-synthesis/)**.
+For more information, please **visit the corresponding [supporting website](https://jake-drysdale.github.io/blog/style-drumsynth/)**.
 
 It contains the following:
   * Audio examples
