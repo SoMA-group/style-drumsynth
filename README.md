@@ -17,7 +17,7 @@ $ pip install -r requirements.txt
 
 #### Checkpoints
 
-The tensorflow checkpoints can be download [here](https://drive.google.com/drive/folders/11v5-xXhPa6Rv6t5V2koeOM9MLdrxvWM9?usp=sharing). Unzip the folder and save it into this projects directory: "style-drumsynth/checkpoints".
+The tensorflow checkpoints for loading pre-trained network weights can be download [here](https://drive.google.com/drive/folders/11v5-xXhPa6Rv6t5V2koeOM9MLdrxvWM9?usp=sharing). Unzip the folder and save it into this projects directory: "style-drumsynth/checkpoints".
 
 ### Usage
 
