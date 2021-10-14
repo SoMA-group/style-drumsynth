@@ -3,6 +3,16 @@ TensorFlow implementation of a style-based version of the adversarial drum synth
 
 ![neural drum synthesis](ADS.png)
 
+## Audio examples
+
+### Random generations
+
+### Music created using generated drum sounds
+
+### This drum sound does not exist
+
+Check out some randomly generated drum sound waveforms [here](https://tdsdne.vercel.app/)
+
 ## Code
 
 ### Dependencies
