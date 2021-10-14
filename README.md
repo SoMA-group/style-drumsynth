@@ -5,9 +5,47 @@ TensorFlow implementation of a style-based version of the adversarial drum synth
 
 ## Audio examples
 
-### Random generations
-
 ### Music created using generated drum sounds
+
+<figure>
+    <figcaption>Hip-hop</figcaption>
+    <audio controls
+    src="./audio/hiphopdemo.wav">
+  </audio>
+</figure>
+
+
+<figure>
+    <figcaption>Drum and bass</figcaption>
+    <audio controls
+    src="./audio/dnbdemo.wav">
+  </audio>
+</figure>
+
+<figure>
+    <figcaption>Breakbeat Morphing</figcaption>
+    <audio controls
+    src="./audio/break-morphing.wav">
+  </audio>
+</figure>
+
+### Transforming input audio
+
+<figure>
+    <figcaption>Beatbox</figcaption>
+    <audio controls
+    src="./audio/beatbox_to_gan.wav">
+  </audio>
+</figure>
+
+<figure>
+    <figcaption>Breakbeat</figcaption>
+    <audio controls
+    src="./audio/hiphop_to_gan.wav">
+  </audio>
+</figure>
+
+
 
 ### This drum sound does not exist
 
