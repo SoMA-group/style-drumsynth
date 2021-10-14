@@ -39,7 +39,7 @@ The tensorflow checkpoints for loading pre-trained network weights can be downlo
 
 ### Usage
 
-The code is contained within the `ads_demo.py` script, which enables conditional synthesises of drum sounds using a pretrained generator.
+The code is contained within the `drumsynth_demo.py` script, which enables conditional synthesises of drum sounds using a pretrained generator.
 
 The following control parameters are available:
 * Condition: which type of drum to generate (kick, snare or hat) 
