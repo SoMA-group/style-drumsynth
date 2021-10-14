@@ -2,7 +2,7 @@
 TensorFlow implementation of a style-based version of the adversarial drum synth (ADS) from the paper [Adversarial Synthesis of Drum Sounds](https://dafx2020.mdw.ac.at/proceedings/papers/DAFx2020_paper_45.pdf) @ The 2020 DAFx Conference.
 
 ![neural drum synthesis](ADS.png)
-*Overview of proposed style-based drum synthesis system.*
+<centre>*Overview of proposed style-based drum synthesis system.*</centre>
 
 ## Audio examples
 
