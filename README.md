@@ -24,17 +24,17 @@ The tensorflow checkpoints for loading pre-trained network weights can be downlo
 The code is contained within the `ads_demo.py` script, which enables conditional synthesises of drum sounds using a pretrained generator.
 
 The following control parameters are available:
-* Condition: which type of drum to generation (kick, snare or hat) 
-* Direction: "features", which principal direction to move in
+* Condition: which type of drum to generate (kick, snare or hat) 
+* Direction: "timbral features", which principal direction to move in [0:4]
 * Direction slider: How far to move in a particular direction
 * Number of generations: How many drums to generate
 * Stocastic Variation: Amount of inconsequential noise to inject into the generator
 * Randomize: Generate by randomly sampling the latent space, or generate from a fixed, pre-computed latent vectors for a kick, snare and hat
-* Encode: regenerate drum sounds stored in the ads_demo/input_audio
+* Encode: regenerate drum sounds stored in the style-drumsynth/input_audio
 
 
-Generations are saved in the ads_demo/generations folder.
-Pretrained model weights are saved in the ads_demo/checkpoints folder.
+Generations are saved in the style-drumsynth/generations folder.
+To experiment encoding your own drums sounds, save your audio files in the "style-drumsynth/input_audio" directory.
 
 
 #### train.py arguments
