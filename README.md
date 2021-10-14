@@ -7,15 +7,14 @@ TensorFlow implementation of a style-based version of the adversarial drum synth
 
 ### Music created using generated drum sounds
 
-[Hip-hop track](https://soundcloud.com/beatsbygan/hip-hop-beat)
-[Drum and bass track](https://soundcloud.com/beatsbygan/drum-and-bass)
-[Breakbeat morphing track](https://soundcloud.com/beatsbygan/bb-morphing)
+* [Hip-hop track](https://soundcloud.com/beatsbygan/hip-hop-beat)
+* [Drum and bass track](https://soundcloud.com/beatsbygan/drum-and-bass)
+* [Breakbeat morphing track](https://soundcloud.com/beatsbygan/bb-morphing)
 
 ### Transforming input audio
 
-[Beatbox-to-drumgan](https://soundcloud.com/beatsbygan/beatbox-to-gan)
-[Breakbeat-to-drumgan](https://soundcloud.com/beatsbygan/hiphop-to-gan)
-
+* [Beatbox-to-drumgan](https://soundcloud.com/beatsbygan/beatbox-to-gan)
+* [Breakbeat-to-drumgan](https://soundcloud.com/beatsbygan/hiphop-to-gan)
 
 
 ### This drum sound does not exist
