@@ -55,7 +55,7 @@ Generations are saved in the style-drumsynth/generations folder.
 To experiment encoding your own drums sounds, save your audio files in the "style-drumsynth/input_audio" directory.
 
 
-#### train.py arguments
+#### drumsynth_demo.py arguments
 
 ```
   -c CONDITION,           --condition CONDITION
