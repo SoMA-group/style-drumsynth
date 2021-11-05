@@ -52,8 +52,6 @@ save_dir= py.join(os.getcwd(), 'generations' )
 encoder_dir = py.join(os.getcwd(),'input_audio') 
 
 
-
-
 def load_networks():
     networks = module.Networks(latent_size=z_dim, 
                                num_res=num_res, 
@@ -98,13 +96,11 @@ def load_networks():
     return G, S, C
 
 
-
 def tf_load_audio(path, size=audio_length):
     audio = tf.io.read_file(path)
     audio, _ = tf.audio.decode_wav(audio, desired_channels=1,
                               desired_samples=size, name=None)
     return audio
-
 
 
 def load_encoder_audio(encoder_dir):
@@ -158,7 +154,6 @@ def synthesize(cond,
                encoder,
                randomize=True):    
 
-    
     if randomize:
         test_noise = layer_noise(amount_to_generate)
         test_labels = np.ones(amount_to_generate)*cond
@@ -173,42 +168,87 @@ def synthesize(cond,
         audio_input = load_encoder_audio(encoder_dir)
         w_test = encode(audio_input, C)
     
-    
     w_hat = feature_slider(w_test, prinicpal_directions, component, direction_slider)
     w_mod=[]
     for i in range(num_res-1):
         w_mod.append(w_hat)
-    
-    
     
     ones_ = np.ones((1, 1), dtype=np.float32)
     inc_n_ = np.random.uniform(0.0, cons_noise_amount,
                                    size = [1, audio_length, channels])
     
 
-
     return sample(w_mod, ones_, inc_n_, G)
 
 
-def save_generations(generations, cond, component, direction_slider, encoder):
+# =============================================================================
+# interpolation 
+# =============================================================================
+def slerp(val, low, high):
+	omega = np.arccos(np.clip(np.dot(low/np.linalg.norm(low), 
+                                  high/np.linalg.norm(high)), -1, 1))
+	so = np.sin(omega)
+	if so == 0:
+		return (1.0-val) * low + val * high
+	return np.sin((1.0-val)*omega) / so * low + np.sin(val*omega) / so * high
+
+
+# uniform interpolation between two points in latent space
+def interpolate_points(p1, p2, n_steps=30):
+    # interpolate ratios between the points
+    ratios = np.linspace(0, 1, num=n_steps)
+    # linear interpolate vectors
+    vectors = list()
+    for ratio in ratios:
+        v = slerp(ratio, p1, p2)
+        vectors.append(v)
+    return np.asarray(vectors)
+
+
+def gen_waveform_interps(args, S, G):
+
+    n=2 #number of samples to make
+    latent_vectors = np.random.normal(0.0, 0.5, [n, 128])
+    interpolated = interpolate_points(latent_vectors[0], latent_vectors[1])
+    test_labels = np.ones(30)*args.condition
+    
+    w_test = S([interpolated, test_labels])
+    w_layers=[]
+    for i in range(num_res-1):
+        w_layers.append(w_test)
+        
+    
+        
+        
+    ones_ = np.ones((1, 1), dtype=np.float32)
+    inc_n_ = np.random.uniform(0.0, args.stocastic_variation,
+                                   size = [1, audio_length, channels])
+    
+    
+    return sample(w_layers, ones_, inc_n_, G)
+
+
+def save_generations(generations, cond, component, direction_slider, args):
     if cond == 0:
         drum_type = 'kick'
     if cond == 1:
         drum_type = 'snare'
     if cond == 2:
         drum_type = 'hat'
-    if encoder == True:
+    if args.encode == True:
         drum_type = 'regeneration'
-    for i in range(len(generations)):
-    # write_wav(py.join(sample_dir, 'beat_iter-%09d.wav' % G_optimizer.iterations.numpy()),np.array(flat_list), 44100)
-        # reshape = np.expand_dims(np.array(x_fake[i]), axis=1)
 
-        pcm = tf.audio.encode_wav(generations[i,:,:], sr)
-        tf.io.write_file(py.join(save_dir, 
-                                  str(i)+'_generated_'+drum_type+'_direction-'+str(component)+'_amount-'+str(direction_slider)+'.wav' ), pcm)
-        
-    
-
+    if not args.interpolation:
+        for i in range(len(generations)):
+            pcm = tf.audio.encode_wav(generations[i,:,:], sr)
+            tf.io.write_file(py.join(save_dir, 
+                                      str(i)+'_generated_'+drum_type+'_direction-'+str(component)+'_amount-'+str(direction_slider)+'.wav' ), pcm)
+            
+    if args.interpolation == True:
+        generations = tf.expand_dims(tf.reshape(generations, [-1]),1)
+        pcm = tf.audio.encode_wav(generations, sr)
+        tf.io.write_file(py.join(save_dir, drum_type+'_interpolation_'+'_direction-'+str(component)+'_amount-'+str(direction_slider)+'.wav' ), pcm)
+                    
 
 def main(args, G, S, C):
     #args
@@ -220,18 +260,22 @@ def main(args, G, S, C):
     randomize = args.randomize
     
     prinicpal_directions = np.load(directions_dir)
-    generated_drums = synthesize(cond, 
-                                 cons_noise_amount, 
-                                 component, 
-                                 direction_slider, 
-                                 amount_to_generate, 
-                                 prinicpal_directions,
-                                 G,
-                                 S,
-                                 C,
-                                 args.encode,
-                                 randomize=randomize)
-    save_generations(generated_drums, cond, component, direction_slider, args.encode)
+    if not args.interpolation:
+        generated_drums = synthesize(cond, 
+                                     cons_noise_amount, 
+                                     component, 
+                                     direction_slider, 
+                                     amount_to_generate, 
+                                     prinicpal_directions,
+                                     G,
+                                     S,
+                                     C,
+                                     args.encode,
+                                     randomize=randomize)
+    if args.interpolation:
+        generated_drums = gen_waveform_interps(args, S, G)
+        
+    save_generations(generated_drums, cond, component, direction_slider, args)
     
     tf.keras.backend.clear_session() #needed?
     
@@ -245,9 +289,9 @@ def animate():
         time.sleep(0.1)
     sys.stdout.write('\rDone!     ')
 
+
 def get_args():
     # command line
-    #TODO: add optional path to encode a drum sound
     py.arg('-c', '--condition', type=int, default=1, help='0: kick, 1: snare, 2:hat')
     py.arg('-d', '--direction', type=int, default=0, help='synthesis controls [0:4]')
     py.arg('-ds', '--direction_slider', type=int, default=5, help='how much to move in a particular direction')
@@ -255,11 +299,12 @@ def get_args():
     py.arg('-v', '--stocastic_variation', type=float, default=0.6, help='amount of inconsequential noise injected')
     py.arg('-r', '--randomize', type=bool, default=True, help='if set to False, a fixed latent vector is used to generated a drum sound from each condition')
     py.arg('-e', '--encode', type=bool, default=False, help='regenerates drum sounds from encoder folder')
+    py.arg('-i', '--interpolation', type=bool, default=False, help='waveform interpolation demo')
+    
     return(py.args())  
 
+
 if __name__ == "__main__":
-    # animate()
-    
     args = get_args()
     done = False
     t = threading.Thread(target=animate)
@@ -268,7 +313,7 @@ if __name__ == "__main__":
     main(args, G, S, C)
     time.sleep(0.2)
     done = True
-    # done = 'true'
+
     
 
 
