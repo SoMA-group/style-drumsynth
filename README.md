@@ -1,5 +1,5 @@
 # Style-based Drum Synthesis with GAN Inversion Demo
-TensorFlow implementation of a style-based version of the adversarial drum synth (ADS) from the paper [Adversarial Synthesis of Drum Sounds](https://dafx2020.mdw.ac.at/proceedings/papers/DAFx2020_paper_45.pdf) @ The 2020 DAFx Conference.
+TensorFlow implementation of a style-based generative adversarial network for conditional synthesis of drum sounds.
 
 ![Overview of proposed style-based drum synthesis system](ADS.png)
 
@@ -8,6 +8,7 @@ TensorFlow implementation of a style-based version of the adversarial drum synth
 ### Music created using generated drum sounds
 
 * [Hip-hop track](https://soundcloud.com/beatsbygan/hip-hop-beat)
+<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/896706142&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/beatsbygan" title="beatsbygan" target="_blank" style="color: #cccccc; text-decoration: none;">beatsbygan</a> · <a href="https://soundcloud.com/beatsbygan/hip-hop-beat" title="Hip hop beat" target="_blank" style="color: #cccccc; text-decoration: none;">Hip hop beat</a></div>
 * [Drum and bass track](https://soundcloud.com/beatsbygan/drum-and-bass)
 * [Breakbeat morphing track](https://soundcloud.com/beatsbygan/bb-morphing)
 
@@ -39,11 +40,11 @@ The tensorflow checkpoints for loading pre-trained network weights can be downlo
 
 ### Usage
 
-The code is contained within the `drumsynth_demo.py` script, which enables conditional synthesises of drum sounds using a pretrained generator.
+The code for generation is contained within the `drumsynth_demo.py` script, which enables conditional synthesises of drum sounds using a pretrained generator.
 
 The following control parameters are available:
 * Condition: which type of drum to generate (kick, snare or hat) 
-* Direction: "timbral features", which principal direction to move in [0:4]
+* Direction: "Synthesis controls", which principal direction to move in [0:4]
 * Direction slider: How far to move in a particular direction
 * Number of generations: How many drums to generate
 * Stocastic Variation: Amount of inconsequential noise to inject into the generator
