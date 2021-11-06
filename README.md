@@ -40,14 +40,14 @@ The tensorflow checkpoints for loading pre-trained network weights can be downlo
 The code for generation is contained within the `drumsynth_demo.py` script, which enables conditional synthesises of drum sounds using a pretrained generator.
 
 The following control parameters are available:
-* Condition: which type of drum to generate (kick, snare or hat) 
-* Direction: "Synthesis controls", which principal direction to move in [0:4]
-* Direction slider: How far to move in a particular direction
-* Number of generations: How many drums to generate
-* Stocastic Variation: Amount of inconsequential noise to inject into the generator
-* Randomize: Generate by randomly sampling the latent space, or generate from a fixed, pre-computed latent vectors for a kick, snare and hat
+* Condition: which type of drum to generate? (kick, snare or hat) 
+* Direction: "synthesis controls", which principal direction to move in? [0:4]
+* Direction slider: how far to move in a particular direction?
+* Number of generations: how many drums to generate?
+* Stocastic Variation: amount of inconsequential noise to inject into the generator layers
+* Randomize: generate by randomly sampling the latent space, or generate from a fixed, pre-computed latent vectors for a kick, snare and hat
 * Encode: regenerate drum sounds stored in the style-drumsynth/input_audio
-* Interpolation: Demonstrates waveform interpolation between two drum sounds
+* Interpolation: demonstrates waveform interpolation between two drum sounds
 
 Generations are saved in the style-drumsynth/generations folder.
 To experiment encoding your own drums sounds, save your audio files in the "style-drumsynth/input_audio" directory.
@@ -86,11 +86,8 @@ The code for training is contained within the `train.py` script, which enables G
   -p PREPROC,             --preproc PREPROC
                             set to True to prepare data for training. Ensure that drum sounds are split into class sub-folders (e.g. kicks, snares, cymbals)
   -cl N_CLASSES,          --n_classes N_CLASSES
-                            number of classes (e.g. 3)
   -sr SAMPLE_RATE,        --sr SAMPLE_RATE
-                            audio sampling rate (e.g. 44100)
   -z Z_DIM                --z_dim Z_DIM
-                            dimensionality of Z (e.g. 128)
   -b BATCH_SIZE           --batch_size BATCH_SIZE
   -e EPOCHS               --epochs EPOCHS
 ```
