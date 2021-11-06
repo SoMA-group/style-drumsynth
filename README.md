@@ -8,7 +8,6 @@ TensorFlow implementation of a style-based generative adversarial network for co
 ### Music created using generated drum sounds
 
 * [Hip-hop track](https://soundcloud.com/beatsbygan/hip-hop-beat)
-<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/896706142&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/beatsbygan" title="beatsbygan" target="_blank" style="color: #cccccc; text-decoration: none;">beatsbygan</a> · <a href="https://soundcloud.com/beatsbygan/hip-hop-beat" title="Hip hop beat" target="_blank" style="color: #cccccc; text-decoration: none;">Hip hop beat</a></div>
 * [Drum and bass track](https://soundcloud.com/beatsbygan/drum-and-bass)
 * [Breakbeat morphing track](https://soundcloud.com/beatsbygan/bb-morphing)
 
@@ -17,10 +16,6 @@ TensorFlow implementation of a style-based generative adversarial network for co
 * [Beatbox-to-drumgan](https://soundcloud.com/beatsbygan/beatbox-to-gan)
 * [Breakbeat-to-drumgan](https://soundcloud.com/beatsbygan/hiphop-to-gan)
 
-
-### This drum sound does not exist
-
-Check out some randomly generated drum sound waveforms [here](https://tdsdne.vercel.app/)
 
 ## Code
 
@@ -40,6 +35,8 @@ The tensorflow checkpoints for loading pre-trained network weights can be downlo
 
 ### Usage
 
+#### Synthesis
+
 The code for generation is contained within the `drumsynth_demo.py` script, which enables conditional synthesises of drum sounds using a pretrained generator.
 
 The following control parameters are available:
@@ -50,7 +47,7 @@ The following control parameters are available:
 * Stocastic Variation: Amount of inconsequential noise to inject into the generator
 * Randomize: Generate by randomly sampling the latent space, or generate from a fixed, pre-computed latent vectors for a kick, snare and hat
 * Encode: regenerate drum sounds stored in the style-drumsynth/input_audio
-
+* Interpolation: Demonstrates waveform interpolation between two drum sounds
 
 Generations are saved in the style-drumsynth/generations folder.
 To experiment encoding your own drums sounds, save your audio files in the "style-drumsynth/input_audio" directory.
@@ -72,8 +69,32 @@ To experiment encoding your own drums sounds, save your audio files in the "styl
   -r RANDOMIZE,           --randomize RANDOMIZE
                             if set to False, a fixed latent vector is used to generate a drum sound from each condition
   -e ENCODE,              --encode ENCODE
-                            regenerates drum sounds from encoder folder
+                            regenerates drum sounds from encoder folder (True/False)
+  -i INTERPOLATION        --interpolation INTERPOLATION
+                            creates linear path between two random latent vectors, generates drum sounds whilst moving along the path in steps                 
 ```
+
+#### Training
+
+The code for training is contained within the `train.py` script, which enables GAN training on a user defined dataset.
+
+#### train.py main arguments
+
+```
+  -d DATASET,             --dataset DATASET
+                            path to training data
+  -p PREPROC,             --preproc PREPROC
+                            set to True to prepare data for training. Ensure that drum sounds are split into class sub-folders (e.g. kicks, snares, cymbals)
+  -cl N_CLASSES,          --n_classes N_CLASSES
+                            number of classes (e.g. 3)
+  -sr SAMPLE_RATE,        --sr SAMPLE_RATE
+                            audio sampling rate (e.g. 44100)
+  -z Z_DIM                --z_dim Z_DIM
+                            dimensionality of Z (e.g. 128)
+  -b BATCH_SIZE           --batch_size BATCH_SIZE
+  -e EPOCHS               --epochs EPOCHS
+```
+
 
 
 ## Supporting webpage
