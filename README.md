@@ -108,7 +108,7 @@ It contains the following:
   * Generating Drum Loops
   * Interpolation demonstration
   * Supplementary figures
-  * A link to the DAFx 2020 paper and presentation
+  * A link to the ISMIR LBD paper and post
 
 
 
