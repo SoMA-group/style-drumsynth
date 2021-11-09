@@ -115,18 +115,20 @@ It contains the following:
 
 ## References
 
-| **[1]** |                  **[Drysdale, J., M. Tomczak, J. Hockman, Adversarial Synthesis of Drum Sounds. Proceedings of the 23rd International Conference on Digital Audio Effects (DAFX), 2020.](https://dafx2020.mdw.ac.at/proceedings/papers/DAFx2020_paper_45.pdf)**|
+## References
+
+| **[1]** |                  **[Drysdale, J. and Tomczak, M. and J. Hockman. 2021. Style-based Drum Synthesis with GAN Inversion. In *Extended Abstracts for the Late-Breaking Demo Sessions of the 22nd International Society for Music Information Retrieval Conference*, Online.](https://archives.ismir.net/ismir2021/latebreaking/000041.pdf)**|
 | :---- | :--- |
 
 ```
-@inproceedings{drysdale2020ads,
-  title={Adversarial synthesis of drum sounds},
-  author={Drysdale, Jake and Tomczak, Maciek and Hockman, Jason},
-  booktitle = {Proceedings of the International Conference on Digital Audio Effects (DAFx)},
-  year={2020}
+@inproceedings{drysdale2021sds,
+  title={Style-based Drum Synthesis with GAN Inversion},
+  author={Drysdale, Jake and Tomczak, Maciej and Hockman, Jason},
+  booktitle = {Extended Abstracts for the Late-Breaking Demo Sessions of the 22nd
+  International Society for Music Information Retrieval (ISMIR) Conference.},
+  year={2021}
 }
 ```
-
 
 ## Help
 
